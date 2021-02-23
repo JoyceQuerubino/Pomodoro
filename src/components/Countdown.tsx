@@ -1,10 +1,13 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from '../styles/components/Countdown.module.css'
 
 export function Countdown(){
 
     //Adicionar o tempo inicial em segundos (25min * 60s)
     const [time, setTime] = useState(25 * 60)
+
+    //Verificar se o cronometro esta ativo - começa como desligado
+    const [active, setActive] = useState(false)
 
     //Arredondar o valor dos minutos para baixo 'Math.floor'
     const minutes = Math.floor(time / 60); 
@@ -26,6 +29,20 @@ export function Countdown(){
     const [minuteLeft, minuteRight] = String(minutes).padStart(2, '0').split('')
     const [secondLeft, secondRight] = String(seconds).padStart(2, '0').split('')
 
+    //Ação de inicializar o cronometro
+    function startCountdown(){
+        setActive(true)
+    }
+
+    //quando = active
+    //quando o valor de active e o time mudar, execute essa função
+    useEffect( () => {
+        if(active && time > 0){
+            setTimeout(() => {
+                setTime(time-1)
+            }, 1000)
+        }
+    }, [active, time])
 
     return(
         <div>
@@ -40,7 +57,11 @@ export function Countdown(){
                     <span>{secondRight}</span>
                 </div>
             </div>
-            <button type="button" className={styles.countdownButton}>
+            <button 
+                type="button" 
+                className={styles.countdownButton}
+                onClick={startCountdown}
+            >
                 Iniciar um ciclo
             </button>
         </div>
