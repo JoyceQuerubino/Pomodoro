@@ -7,7 +7,7 @@ export function Countdown(){
     const [time, setTime] = useState(25 * 60)
 
     //Verificar se o cronometro esta ativo - começa como desligado
-    const [active, setActive] = useState(false)
+    const [isActive, setIsActive] = useState(false)
 
     //Arredondar o valor dos minutos para baixo 'Math.floor'
     const minutes = Math.floor(time / 60); 
@@ -31,18 +31,18 @@ export function Countdown(){
 
     //Ação de inicializar o cronometro
     function startCountdown(){
-        setActive(true)
+        setIsActive(true)
     }
 
     //quando = active
     //quando o valor de active e o time mudar, execute essa função
     useEffect( () => {
-        if(active && time > 0){
+        if(isActive && time > 0){
             setTimeout(() => {
                 setTime(time-1)
             }, 1000)
         }
-    }, [active, time])
+    }, [isActive, time])
 
     return(
         <div>
@@ -57,13 +57,24 @@ export function Countdown(){
                     <span>{secondRight}</span>
                 </div>
             </div>
-            <button 
+
+           {isActive ? (
+                <button 
+                type="button" 
+                className={styles.countdownButton}
+                onClick={startCountdown}
+            >
+                Abandonar ciclo
+            </button>
+           ): (
+           <button 
                 type="button" 
                 className={styles.countdownButton}
                 onClick={startCountdown}
             >
                 Iniciar um ciclo
             </button>
+           )}
         </div>
     )
 }
