@@ -7,10 +7,13 @@ let countdownTimeout: NodeJS.Timeout;
 export function Countdown(){
 
     //Adicionar o tempo inicial em segundos (25min * 60s)
-    const [time, setTime] = useState(25 * 60)
+    const [time, setTime] = useState(0.1 * 60)
 
     //Verificar se o cronometro esta ativo - começa como desligado
     const [isActive, setIsActive] = useState(false)
+
+    //O cronometro chegou a 0
+    const [hasFinished, setHasFinished] = useState(false)
 
     //Arredondar o valor dos minutos para baixo 'Math.floor'
     const minutes = Math.floor(time / 60); 
@@ -40,6 +43,7 @@ export function Countdown(){
     function resetCountdown(){
         clearTimeout(countdownTimeout);
         setIsActive(false);
+        setTime(0.1 * 60)
     }
 
     //quando = active
@@ -49,6 +53,11 @@ export function Countdown(){
             countdownTimeout = setTimeout(() => {
                 setTime(time-1)
             }, 1000)
+        }
+        //Quando o time chegar a 0 dar o aviso
+        else if(isActive && time === 0){
+            setHasFinished(true);
+            setIsActive(false);
         }
     }, [isActive, time])
 
@@ -66,23 +75,35 @@ export function Countdown(){
                 </div>
             </div>
 
-           {isActive ? (
-                <button 
-                type="button" 
-                className={`${styles.countdownButton} ${styles.countdownButtonActive}`}
-                onClick={startCountdown}
-            >
-                Abandonar ciclo
-            </button>
-           ): (
-           <button 
-                type="button" 
-                className={styles.countdownButton}
-                onClick={resetCountdown}
-            >
-                Iniciar um ciclo
-            </button>
-           )}
+            
+            {hasFinished ? (
+                    <button 
+                    disabled
+                    className={styles.countdownButton}
+                >
+                    Ciclo encerrado
+                </button>
+            ) : (
+                <>
+                 {isActive ? (
+                    <button 
+                        type="button" 
+                        className={`${styles.countdownButton} ${styles.countdownButtonActive}`}
+                        onClick={resetCountdown}
+                    >
+                    Abandonar ciclo
+                    </button>
+                ): (
+                    <button 
+                        type="button" 
+                        className={styles.countdownButton}
+                        onClick={startCountdown}
+                    >
+                        Iniciar um ciclo
+                    </button>
+                    )}
+                </>
+            )}
         </div>
     )
 }
