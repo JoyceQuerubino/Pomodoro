@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react'
 import styles from '../styles/components/Countdown.module.css'
 
+//Criar uma vaeriável para não deixar o tempo passar
+let countdownTimeout: NodeJS.Timeout;
+
 export function Countdown(){
 
     //Adicionar o tempo inicial em segundos (25min * 60s)
@@ -31,14 +34,19 @@ export function Countdown(){
 
     //Ação de inicializar o cronometro
     function startCountdown(){
-        setIsActive(true)
+        setIsActive(true);
+    }
+
+    function resetCountdown(){
+        clearTimeout(countdownTimeout);
+        setIsActive(false);
     }
 
     //quando = active
     //quando o valor de active e o time mudar, execute essa função
     useEffect( () => {
         if(isActive && time > 0){
-            setTimeout(() => {
+            countdownTimeout = setTimeout(() => {
                 setTime(time-1)
             }, 1000)
         }
@@ -61,7 +69,7 @@ export function Countdown(){
            {isActive ? (
                 <button 
                 type="button" 
-                className={styles.countdownButton}
+                className={`${styles.countdownButton} ${styles.countdownButtonActive}`}
                 onClick={startCountdown}
             >
                 Abandonar ciclo
@@ -70,7 +78,7 @@ export function Countdown(){
            <button 
                 type="button" 
                 className={styles.countdownButton}
-                onClick={startCountdown}
+                onClick={resetCountdown}
             >
                 Iniciar um ciclo
             </button>
