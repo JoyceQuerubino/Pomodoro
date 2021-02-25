@@ -1,7 +1,7 @@
 <!--Banner e logo-->
 
 <p align="center">
-   <img src="/github/logo.png" alt="Proffy" />
+   <img src="/public/icons/logo-full.svg" alt="Logo" />
 </p>
 
 <!-- Badges -->
@@ -9,10 +9,6 @@
    <a href="https://www.linkedin.com/in/joyce-querubino/">
       <img alt="Felipe Martins" src="https://img.shields.io/badge/-Joyce Querubino-5965E0?style=flat&logo=Linkedin&logoColor=white" />
    </a>
-
-  <a href="https://nextlevelweek.com/episodios/discovery/1/edicao/2">
-    <img alt="NextLevelWeek#2" src="https://img.shields.io/badge/Next Level Week%20-2.0-%5965E0">
-  </a>
 
   <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/K-Schaeffer/NLW-2?color=5965E0">
 
@@ -24,7 +20,7 @@
 <!-- Indice-->
 <p align="center">
  <a href="#-sobre-o-projeto">Sobre</a> •
- <a href="#-Funcionalidades">Funcionalidades</a> • 
+ <a href="#-Funcionamento">Funcionamento</a> • 
  <a href="#-Preview">Preview</a> • 
  <a href="#-Layout">Layout</a> •  
  <a href="#-como-executar-o-projeto">Executando</a> • 
@@ -46,11 +42,11 @@ A aplicação <strong>Pomodoro</strong> surgiu baseada na técnica de estudos e 
 
 ## ⚙️ Funcionamento
 
-A aplicacação funciona
+Para iniciar a aplicação o usuário deve clicar em <strong>'Iniciar ciclo'</strong> e durante este tempo ele irá executar suas tarefas, após completar o tempo de 25min (que para testes foi reduzido para 6s) o ciclo será encerrado e um novo desafio irá aparecer na tela, podendo o usuário marcar como <strong>'Completei'</strong> e receber os Xp necessários para subir de level ou marcar como <strong>'Falhei'</strong> e voltar para iniciar um novo ciclo.
 
 ---
 
-## Preview
+## 🖥 Preview
 
 <h1 align="center">
    <img src="/github/Proffy-Web.gif" alt="Proffy versão web" />
