@@ -1,4 +1,4 @@
-import { createContext, useState, ReactNode } from 'react'; 
+import { createContext, useState, ReactNode, useEffect } from 'react'; 
 import challenges from '../../challenges.json'; //importtando arrey de desafios
 
 interface Challenge{
@@ -34,6 +34,10 @@ export function ChallengesProvider({ children }: ChallengesProviderProps){
 
     //Calculando quanto falta pra upar de level
     const experienceToNextLevel = Math.pow((level + 1) * 4, 2)
+
+    useEffect(() => {
+        Notification.requestPermission();
+    }, [])
     
     function levelUp(){
       setlevel(level + 1); 
@@ -45,6 +49,15 @@ export function ChallengesProvider({ children }: ChallengesProviderProps){
         const challenge = challenges[ramdomChallengeIndex]; 
 
         setActiveChallenge(challenge)
+
+        //Adicionando som a ação (é literalmente APENAS essa linha)
+        new Audio('/notification.mp3').play();
+
+        if(Notification.permission === 'granted'){
+            new Notification('Novo desafio', {
+                body: `Valendo ${challenge.amount}xp!`
+            })
+        }
     }
 
     //ação do botão de falhar
