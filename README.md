@@ -96,7 +96,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 #### **Utilitários**
 
-- Editor: **[Visual Studio Code](https://code.visualstudio.com/)** → Extensions: **[SQLite](https://marketplace.visualstudio.com/items?itemName=alexcvzz.vscode-sqlite)**
+- Editor: **[Visual Studio Code](https://code.visualstudio.com/)**
 - Layout: **[Figma](https://www.figma.com/)** → **[Layout (Move.it)](<https://www.figma.com/file/feOsn5W1ndmeS3OjEoo83w/Move.it-1.0-(Copy)>)**
 - Markdown: **[EmojiCopy](https://www.emojicopy.com)**, **[Markdown Emoji](https://gist.github.com/rxaviers/7360908)**
 - Badges: **[Shields.io](https://shields.io)**
