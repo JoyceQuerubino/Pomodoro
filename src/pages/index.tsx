@@ -9,7 +9,8 @@ import styles from '../styles/Pages/Home.module.css';
 import { ChallengeBox } from "../components/ChallengeBox";
 import { CountdownProvider } from "../contexts/CountdownContext";
 
-export default function Home() {
+export default function Home(props) {
+
   return (
     <div className={styles.container}>
       <Head>
@@ -33,4 +34,19 @@ export default function Home() {
       
     </div>
   )
+}
+
+//Para manipular os dados que serão passados da camada front-end para a camada do Next.js
+export const getServerSideProps = async () => {
+  //chamando a api
+  const user = {
+    level: 1,
+    currentExperience: 50,
+    challengesCompleted: 2,   
+
+  }
+  
+  return {
+    props: user
+  }
 }
