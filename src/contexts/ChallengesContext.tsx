@@ -2,6 +2,7 @@ import { createContext, useState, ReactNode, useEffect } from 'react';
 import Cookies from 'js-cookie'; 
 import challenges from '../../challenges.json'; //importtando arrey de desafios
 
+import { LevelUpModal } from '../components/LevelUpModal';
 interface Challenge{
     type: 'body' | 'eye'; 
     description: string; 
@@ -18,6 +19,7 @@ interface ChallengesContextData{
     startNewChallenge: () => void;
     resetChallenge: () => void;
     completedChallenge: () => void;
+    closeLevelModal: () => void;
 }
 interface ChallengesProviderProps{
     children: ReactNode;
@@ -38,6 +40,7 @@ export function ChallengesProvider({
     const [challengesCompleted, setChallengesCompleted] = useState( rest.challengesCompleted ?? 0)
 
     const [activeChallenge, setActiveChallenge] = useState(null); 
+    const [isLevelUpModalOpen, setIsLevelModalOpen] = useState(false); 
 
     //Calculando quanto falta pra upar de level
     const experienceToNextLevel = Math.pow((level + 1) * 4, 2)
@@ -54,7 +57,12 @@ export function ChallengesProvider({
     
     function levelUp(){
       setlevel(level + 1); 
+      setIsLevelModalOpen(true); 
     } 
+
+    function closeLevelModal(){
+        setIsLevelModalOpen(false)
+    }
 
     function startNewChallenge(){
         //pegando um desafio aleatório (Math.floor para arredondar p baixo)
@@ -109,8 +117,13 @@ export function ChallengesProvider({
             activeChallenge,
             resetChallenge,
             completedChallenge, 
-        }}>
+            closeLevelModal
+        }}
+        >
             {children}
+        
+        {isLevelUpModalOpen && <LevelUpModal />}
+    
         </ChallengesContext.Provider>
     )
 }
